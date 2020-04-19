@@ -1,0 +1,62 @@
+[
+    {
+        "id": "557c81cb.728ca",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "79b9207d.3c0c",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "iot",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "5b427752.0eb4c8",
+        "type": "mqtt in",
+        "z": "557c81cb.728ca",
+        "name": "",
+        "topic": "sensors/temp",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "79b9207d.3c0c",
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "b61be72b.3a4e28"
+            ]
+        ]
+    },
+    {
+        "id": "b61be72b.3a4e28",
+        "type": "e-mail",
+        "z": "557c81cb.728ca",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "zakaricia@gmail.com",
+        "dname": "zak",
+        "x": 470,
+        "y": 160,
+        "wires": []
+    }
+]
