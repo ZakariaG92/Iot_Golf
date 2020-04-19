@@ -41,7 +41,7 @@
         "y": 180,
         "wires": [
             [
-                "b61be72b.3a4e28"
+                "7b1d42af.53648c"
             ]
         ]
     },
@@ -53,10 +53,26 @@
         "port": "465",
         "secure": true,
         "tls": true,
-        "name": "zakaricia@gmail.com",
+        "name": "hsaid058@uottawa.ca",
         "dname": "zak",
-        "x": 470,
+        "x": 710,
         "y": 160,
         "wires": []
+    },
+    {
+        "id": "7b1d42af.53648c",
+        "type": "function",
+        "z": "557c81cb.728ca",
+        "name": "capture_playloads",
+        "func": "var jsonmsg = msg.payload;\nvar qui = jsonmsg.who; \nvar valeur= jsonmsg.value;\nvar mes='{ \"nom\":'+'\"'+qui+'\"'+', \"valeur\":'+valeur+'}'; \nvar mestest='Monsieur '+qui+' a la température chez lui de'+valeur;\nvar obj = JSON.parse(mes);\nmsg.payload=mestest;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            [
+                "b61be72b.3a4e28"
+            ]
+        ]
     }
 ]
