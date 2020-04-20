@@ -29,6 +29,15 @@
         "willPayload": ""
     },
     {
+        "id": "e6c26dc9.04db7",
+        "type": "mongodb",
+        "z": "",
+        "hostname": "localhost",
+        "port": "27017",
+        "db": "golf",
+        "name": ""
+    },
+    {
         "id": "5b427752.0eb4c8",
         "type": "mqtt in",
         "z": "557c81cb.728ca",
@@ -41,7 +50,8 @@
         "y": 180,
         "wires": [
             [
-                "7b1d42af.53648c"
+                "7b1d42af.53648c",
+                "6a2af111.d8bab"
             ]
         ]
     },
@@ -53,9 +63,9 @@
         "port": "465",
         "secure": true,
         "tls": true,
-        "name": "hsaid058@uottawa.ca",
+        "name": "zakaria@yopmail.com",
         "dname": "zak",
-        "x": 710,
+        "x": 630,
         "y": 160,
         "wires": []
     },
@@ -63,16 +73,31 @@
         "id": "7b1d42af.53648c",
         "type": "function",
         "z": "557c81cb.728ca",
-        "name": "capture_playloads",
+        "name": "",
         "func": "var jsonmsg = msg.payload;\nvar qui = jsonmsg.who; \nvar valeur= jsonmsg.value;\nvar mes='{ \"nom\":'+'\"'+qui+'\"'+', \"valeur\":'+valeur+'}'; \nvar mestest='Monsieur '+qui+' a la température chez lui de'+valeur;\nvar obj = JSON.parse(mes);\nmsg.payload=mestest;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 470,
+        "x": 450,
         "y": 160,
         "wires": [
             [
                 "b61be72b.3a4e28"
             ]
         ]
+    },
+    {
+        "id": "6a2af111.d8bab",
+        "type": "mongodb out",
+        "z": "557c81cb.728ca",
+        "mongodb": "e6c26dc9.04db7",
+        "name": "db",
+        "collection": "temperature",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 450,
+        "y": 260,
+        "wires": []
     }
 ]
