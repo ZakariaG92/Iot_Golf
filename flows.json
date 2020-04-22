@@ -1,13 +1,20 @@
 [
     {
-        "id": "557c81cb.728ca",
+        "id": "91f88ce8.8d3f7",
         "type": "tab",
         "label": "Flow 1",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "79b9207d.3c0c",
+        "id": "ee5855d7.3af4e8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "fd3ef5e5.80f328",
         "type": "mqtt-broker",
         "z": "",
         "name": "iot",
@@ -29,50 +36,46 @@
         "willPayload": ""
     },
     {
-        "id": "e6c26dc9.04db7",
+        "id": "80622726.88bb08",
         "type": "mongodb",
         "z": "",
-        "hostname": "localhost",
+        "hostname": "http://212.115.110.52/",
         "port": "27017",
         "db": "golf",
         "name": ""
     },
     {
-        "id": "5b427752.0eb4c8",
+        "id": "ab590201.bac29",
+        "type": "mongodb3",
+        "z": "",
+        "uri": "mongodb://212.115.110.52:27017/golf",
+        "name": "golf",
+        "options": "",
+        "parallelism": "-1"
+    },
+    {
+        "id": "4f832c66.6ffd24",
         "type": "mqtt in",
-        "z": "557c81cb.728ca",
+        "z": "ee5855d7.3af4e8",
         "name": "",
         "topic": "sensors/temp",
         "qos": "0",
         "datatype": "json",
-        "broker": "79b9207d.3c0c",
+        "broker": "fd3ef5e5.80f328",
         "x": 250,
         "y": 180,
         "wires": [
             [
-                "7b1d42af.53648c",
-                "6a2af111.d8bab"
+                "1120a287.1f700d",
+                "2737afa3.1d56d",
+                "fa2eab4d.b68cb8"
             ]
         ]
     },
     {
-        "id": "b61be72b.3a4e28",
-        "type": "e-mail",
-        "z": "557c81cb.728ca",
-        "server": "smtp.gmail.com",
-        "port": "465",
-        "secure": true,
-        "tls": true,
-        "name": "zakaria@yopmail.com",
-        "dname": "zak",
-        "x": 630,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "7b1d42af.53648c",
+        "id": "1120a287.1f700d",
         "type": "function",
-        "z": "557c81cb.728ca",
+        "z": "ee5855d7.3af4e8",
         "name": "",
         "func": "var jsonmsg = msg.payload;\nvar qui = jsonmsg.who; \nvar valeur= jsonmsg.value;\nvar mes='{ \"nom\":'+'\"'+qui+'\"'+', \"valeur\":'+valeur+'}'; \nvar mestest='Monsieur '+qui+' a la température chez lui de'+valeur;\nvar obj = JSON.parse(mes);\nmsg.payload=mestest;\nreturn msg;",
         "outputs": 1,
@@ -80,24 +83,231 @@
         "x": 450,
         "y": 160,
         "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2737afa3.1d56d",
+        "type": "mongodb3 in",
+        "z": "ee5855d7.3af4e8",
+        "service": "_ext_",
+        "configNode": "ab590201.bac29",
+        "name": "",
+        "collection": "temperature",
+        "operation": "insert",
+        "x": 520,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7af26f07.c9d75",
+        "type": "mongodb3 in",
+        "z": "ee5855d7.3af4e8",
+        "service": "_ext_",
+        "configNode": "ab590201.bac29",
+        "name": "",
+        "collection": "condition",
+        "operation": "insert",
+        "x": 750,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fa2eab4d.b68cb8",
+        "type": "switch",
+        "z": "ee5855d7.3af4e8",
+        "name": "if GASMI",
+        "property": "payload.who",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "GASMI",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": true,
+        "outputs": 1,
+        "x": 440,
+        "y": 360,
+        "wires": [
             [
-                "b61be72b.3a4e28"
+                "7af26f07.c9d75"
             ]
         ]
     },
     {
-        "id": "6a2af111.d8bab",
-        "type": "mongodb out",
-        "z": "557c81cb.728ca",
-        "mongodb": "e6c26dc9.04db7",
-        "name": "db",
-        "collection": "temperature",
-        "payonly": true,
-        "upsert": false,
-        "multi": false,
+        "id": "47cee638.a786d8",
+        "type": "http request",
+        "z": "ee5855d7.3af4e8",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "https://api.openweathermap.org/data/2.5/onecall?lat=43.61740493774414&lon=7.064357280731201&appid=146c88042f08f44a22edb9d72ad9e2c6",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 390,
+        "y": 460,
+        "wires": [
+            [
+                "ca662829.106378"
+            ]
+        ]
+    },
+    {
+        "id": "ca662829.106378",
+        "type": "mongodb3 in",
+        "z": "ee5855d7.3af4e8",
+        "service": "_ext_",
+        "configNode": "ab590201.bac29",
+        "name": "",
+        "collection": "meteo",
         "operation": "insert",
-        "x": 450,
-        "y": 260,
+        "x": 640,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b02ec4ea.cde5c8",
+        "type": "function",
+        "z": "ee5855d7.3af4e8",
+        "name": "",
+        "func": "var payload=msg.payload;\nvar parse= JSON.parse(payload);\nmsg.payload=parse;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 110,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e1898df9.9ebad",
+        "type": "inject",
+        "z": "ee5855d7.3af4e8",
+        "name": "",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "repeat": "",
+        "crontab": "50 21 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "47cee638.a786d8"
+            ]
+        ]
+    },
+    {
+        "id": "c9871829.633148",
+        "type": "http request",
+        "z": "ee5855d7.3af4e8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": true,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 350,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88da5f31.6f77d",
+        "type": "http request",
+        "z": "91f88ce8.8d3f7",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": true,
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 570,
+        "y": 220,
+        "wires": [
+            [
+                "70690c55.5ddf74"
+            ]
+        ]
+    },
+    {
+        "id": "70690c55.5ddf74",
+        "type": "debug",
+        "z": "91f88ce8.8d3f7",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 730,
+        "y": 220,
         "wires": []
+    },
+    {
+        "id": "36f18b9d.4e57e4",
+        "type": "inject",
+        "z": "91f88ce8.8d3f7",
+        "name": "query parameter",
+        "topic": "",
+        "payload": "api.openweathermap.org/data/2.5/weather?q=biot&appid=146c88042f08f44a22edb9d72ad9e2c6",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "x": 220,
+        "y": 220,
+        "wires": [
+            [
+                "f1f2376e.e33588"
+            ]
+        ]
+    },
+    {
+        "id": "f1f2376e.e33588",
+        "type": "change",
+        "z": "91f88ce8.8d3f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "query",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "88da5f31.6f77d"
+            ]
+        ]
     }
 ]
