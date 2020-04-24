@@ -29,7 +29,7 @@ const char* mqtt_server = "212.115.110.52";
 #define TOPIC_TEMP "sensors/temp/jassim"
 #define TOPIC_LED "sensors/led/jassim"
 #define TOPIC_LIGHT "sensors/photoresistor/jassim"
-#define TOPIC_CALLBACK "callback"
+#define TOPIC_CALLBACK "callback/jassim"
 
 /*=============== SETUP =====================*/
 
