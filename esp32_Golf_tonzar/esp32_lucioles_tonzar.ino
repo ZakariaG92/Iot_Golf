@@ -29,7 +29,7 @@ const char* mqtt_server = "212.115.110.52";
 #define TOPIC_TEMP "sensors/temp/tonzar"
 #define TOPIC_LED "sensors/led/tonzar"
 #define TOPIC_LIGHT "sensors/photoresistor/tonzar"
-#define TOPIC_CALLBACK "callback"
+#define TOPIC_CALLBACK "callback/tonzar"
 
 /*=============== SETUP =====================*/
 
