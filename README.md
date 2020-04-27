@@ -1,5 +1,17 @@
 # Projet de gestion d'un terrain de golf.
 
+## Créateur
+
+  ##### EL HAROUI Jassim
+  ##### GASMI Zakaria
+  ##### TONZAR Mohammed
+  
+## Site d'hébergement 
+
+http://212.115.110.52:1880/ui
+
+## Description
+
 <p>dans ce projet, on souhaite gérer un terrain de golf en utilisant les objets connectés, en effet on dispose de thermométres, Photoresistor,
 ainsi que des robinets d'arrosage (LED).<p>
   
