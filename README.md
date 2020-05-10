@@ -1,6 +1,18 @@
 # Projet de gestion d'un terrain de golf.
 
-<p>dans ce projet, on souhaite gérer un terrain de golf en utilisant les objets connectés, en effet on dispose de thermométres, Photoresistor,
+## Créateur
+
+  ##### EL HAROUI Jassim
+  ##### GASMI Zakaria
+  ##### TONZAR Mohammed
+  
+## Site d'hébergement 
+
+http://212.115.110.52:1880/ui
+
+## Description
+
+<p>Dans ce projet, on souhaite gérer un terrain de golf en utilisant les objets connectés, en effet on dispose de thermométres, Photoresistor,
 ainsi que des robinets d'arrosage (LED).<p>
   
 <p> Pour cela, on a un terrain avec diverses qualités de terres, de la plus médiocre avec un indice de 1 a la plus fertile avec un indice de 4, on souhaite gérer cette arrosage en fonction de la météo journaliére, de l'ensoleillement de la zone ainsi que la température global.
